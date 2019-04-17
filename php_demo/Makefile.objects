@@ -1,0 +1,8 @@
+demo.lo: /back/code/php_code/php_demo/demo.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/back/code/php_code/php_demo $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /back/code/php_code/php_demo/demo.c -o demo.lo 
+$(phplibdir)/demo.la: ./demo.la
+	$(LIBTOOL) --mode=install cp ./demo.la $(phplibdir)
+
+./demo.la: $(shared_objects_demo) $(DEMO_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_demo) $(DEMO_SHARED_LIBADD)
+

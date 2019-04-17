@@ -1,0 +1,14 @@
+adx.lo: /make/www/php_module/adx.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/make/www/php_module $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /make/www/php_module/adx.c -o adx.lo 
+adx_app.lo: /make/www/php_module/adx_app.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/make/www/php_module $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /make/www/php_module/adx_app.c -o adx_app.lo 
+adx_bootstrap.lo: /make/www/php_module/adx_bootstrap.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/make/www/php_module $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /make/www/php_module/adx_bootstrap.c -o adx_bootstrap.lo 
+adx_controllers.lo: /make/www/php_module/adx_controllers.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/make/www/php_module $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /make/www/php_module/adx_controllers.c -o adx_controllers.lo 
+$(phplibdir)/adx.la: ./adx.la
+	$(LIBTOOL) --mode=install cp ./adx.la $(phplibdir)
+
+./adx.la: $(shared_objects_adx) $(ADX_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_adx) $(ADX_SHARED_LIBADD)
+
